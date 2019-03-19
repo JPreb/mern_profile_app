@@ -22,7 +22,7 @@ mongoose
 // Use Routes
 app.use('/api/userReg', require('./routes/api/userReg'));
 app.use('/api/userLogin', require('./routes/api/userLogin'));
-app.use('/api/userProfile', require('./routes/api/userProfile'));
+app.use('/api/user', require('./routes/api/user'));
 
 // Use PORT for heroku deployment or 5000 for local hosting
 const port = process.env.PORT || 5000;

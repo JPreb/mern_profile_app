@@ -5,8 +5,8 @@ const tokenAuth = require('../../middleware/tokenAuth');
 
 const User = require('../../models/User');
 
-// @router  GET api/userProfile
-// @desc    Get user profile
+// @router  GET api/user
+// @desc    Get user
 // @access  Private
 router.get('/', tokenAuth, (req, res) => {
   User.findById(req.user.id)
