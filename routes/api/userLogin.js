@@ -4,6 +4,15 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const config = require('config');
 
+const jwtSecret;
+if (process.env.NODE_ENV === 'production') {
+  // production env variable
+  jwtSecret = process.env.jwtSecret;
+}
+else {
+  jwtSecret = config.jwtSecret;
+}
+
 // User model
 const User = require('../../models/User');
 
@@ -27,7 +36,7 @@ router.post('/', (req, res) => {
       // Token includes user id so that when the token is decoded the user id can be pulled from it and used
       jwt.sign(
         { id: user.id },
-        config.jwtSecret,
+        jwtSecret,
         { expiresIn: 3600 },
         (err, token) => {
           if (err) throw err;

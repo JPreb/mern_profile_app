@@ -1,6 +1,15 @@
 const config = require('config');
 const jwt = require('jsonwebtoken');
 
+const jwtSecret;
+if (process.env.NODE_ENV === 'production') {
+  // production env variable
+  jwtSecret = process.env.jwtSecret;
+}
+else {
+  jwtSecret = config.jwtSecret;
+}
+
 function tokenAuth(req, res, next) {
   // Getting token from payload header object
   const token = req.header('user-token');
@@ -11,7 +20,7 @@ function tokenAuth(req, res, next) {
 
   try {
     // Verify and decode token
-    const decodedToken = jwt.verify(token, config.get('jwtSecret'));
+    const decodedToken = jwt.verify(token, jwtSecret);
     // Decoded token contains user id, creation time of token, & expiration time of token; add this to payload
     req.user = decodedToken;
     // Call the profile route function
