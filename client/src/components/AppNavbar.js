@@ -6,7 +6,8 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  Container
+  Container,
+  NavLink
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -36,9 +37,14 @@ export class AppNavbar extends Component {
     const userLinks = (
       <Fragment>
         <NavItem>
-          <span className="navbar-text mr-3">
+          <span className="navbar-text mr-2">
             {user ? `Welcome ${user.firstName}` : ''}
           </span>
+        </NavItem>
+        <NavItem>
+          <NavLink tag={Link} to="/userProfile">
+            Profile
+          </NavLink>
         </NavItem>
         <NavItem>
           <Logout />
