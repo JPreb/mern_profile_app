@@ -4,13 +4,11 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const config = require('config');
 
-const jwtSecret;
+var jwtSecret;
 if (process.env.NODE_ENV === 'production') {
-  // production env variable
   jwtSecret = process.env.jwtSecret;
-}
-else {
-  jwtSecret = config.jwtSecret;
+} else {
+  jwtSecret = config.get('jwtSecret');
 }
 
 // User model

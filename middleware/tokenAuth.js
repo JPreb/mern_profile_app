@@ -1,13 +1,11 @@
 const config = require('config');
 const jwt = require('jsonwebtoken');
 
-const jwtSecret;
+var jwtSecret;
 if (process.env.NODE_ENV === 'production') {
-  // production env variable
   jwtSecret = process.env.jwtSecret;
-}
-else {
-  jwtSecret = config.jwtSecret;
+} else {
+  jwtSecret = config.get('jwtSecret');
 }
 
 function tokenAuth(req, res, next) {
